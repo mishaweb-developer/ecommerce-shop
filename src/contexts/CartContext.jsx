@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -8,7 +8,11 @@ TODO: Implementiraj Cart state, add, remove, update, clear, total i ukupnu koliÄ
 HINT: Koristi React Context i useState; localStorage dolazi u TASK-07.
 RULE: cartQuantity je zbir quantity vrednosti svih stavki, a Cart radi i za gosta.
 */
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -73,6 +77,11 @@ RULE: cartQuantity je zbir quantity vrednosti svih stavki, a Cart radi i za gost
     cartTotal,
     cartQuantity,
   };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 export function useCart() {
