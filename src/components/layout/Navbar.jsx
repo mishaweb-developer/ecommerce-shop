@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Menu, ShoppingCart, Store, UserRound, X } from "lucide-react";
 import NavLinks from "./NavLinks";
 import SearchInput from "../ui/SearchInput";
+import { useCart } from "../../contexts/CartContext";
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const { cartQuantity } = useCart();
   const navigate = useNavigate();
 
   function handleSearchSubmit(e) {
@@ -46,7 +49,11 @@ export default function Navbar() {
           <div className="ml-auto flex items-center gap-4 lg:ml-0">
             <Link to="/cart" aria-label="Cart" className="relative">
               <ShoppingCart />
-              {/* TASK-09: TODO: Prikaži badge sa zbirom količina, ne brojem različitih stavki. */}
+              {cartQuantity > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-xs text-white">
+                  {cartQuantity}
+                </span>
+              )}
             </Link>
             <Link to="/login" aria-label="Login">
               <UserRound />
