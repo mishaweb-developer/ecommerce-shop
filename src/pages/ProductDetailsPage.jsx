@@ -6,21 +6,28 @@ import SizeOption from "../components/product/SizeOption";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiClient } from "../api/apiClient";
+import { useCart } from "../contexts/CartContext";
 
 export default function ProductDetailsPage() {
-  // const product = {
-  //   name: "Product name",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
-  //   price: 0,
-  //   sizes: ["S", "M", "L", "XL"],
-  // };
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
+  const { addToCart } = useCart();
+
+  function handleAddToCart() {
+    if (!selectedSize) return;
+
+    addToCart({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      size: selectedSize,
+      quantity,
+    });
+  }
 
   useEffect(() => {
     async function loadProduct() {
@@ -91,7 +98,11 @@ export default function ProductDetailsPage() {
               onIncrease={() => setQuantity((prevQuantity) => prevQuantity + 1)}
             />
           </div>
-          <Button size="large" className="mt-8 w-full sm:w-auto">
+          <Button
+            size="large"
+            className="mt-8 w-full sm:w-auto"
+            onClick={handleAddToCart}
+          >
             Add to Cart
           </Button>
         </div>
