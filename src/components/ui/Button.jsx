@@ -1,0 +1,3 @@
+const variants={primary:'border-foreground bg-foreground text-white hover:bg-white hover:text-foreground',outline:'border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-white'};
+const sizes={small:'h-[45px] px-5',medium:'h-[50px] px-6',large:'h-[55px] px-8'};
+export default function Button({children,variant='primary',size='medium',type='button',disabled=false,onClick,className=''}){return <button type={type} disabled={disabled} onClick={onClick} className={`inline-flex items-center justify-center rounded-[10px] border font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`}>{children}</button>}

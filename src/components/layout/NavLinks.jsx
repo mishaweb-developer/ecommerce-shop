@@ -1,0 +1,2 @@
+import { NavLink } from 'react-router-dom';
+export default function NavLinks({onNavigate=()=>{},className=''}){const links=[['Home','/'],['Shop','/products'],['About Us','/about']];return <nav className={className}>{links.map(([label,to])=><NavLink key={to} to={to} onClick={onNavigate} className={({isActive})=>`body-small font-semibold hover:text-accent ${isActive?'text-accent':''}`}>{label}</NavLink>)}{/* TASK-10: TODO: Prikaži My Orders samo authenticated korisniku. HINT: Koristi AuthContext. */}</nav>}

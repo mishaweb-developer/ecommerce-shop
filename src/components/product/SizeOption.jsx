@@ -1,0 +1,1 @@
+export default function SizeOption({size,selected=false,onClick=()=>{}}){return <button type="button" onClick={onClick} aria-pressed={selected} className={`h-[35px] min-w-[60px] rounded-[10px] border-2 px-3 text-sm font-semibold ${selected?'border-foreground bg-foreground text-white':'border-border-subtle bg-white'}`}>{size}</button>}

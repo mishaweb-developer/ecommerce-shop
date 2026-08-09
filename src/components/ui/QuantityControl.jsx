@@ -1,0 +1,2 @@
+import { Minus,Plus } from 'lucide-react';
+export default function QuantityControl({quantity=1,onDecrease=()=>{},onIncrease=()=>{}}){return <div className="flex h-9 w-[110px] items-center justify-between rounded-[10px] border-2 border-border-subtle px-2"><button type="button" onClick={onDecrease} aria-label="Decrease quantity"><Minus size={16}/></button><span className="text-sm font-semibold">{quantity}</span><button type="button" onClick={onIncrease} aria-label="Increase quantity"><Plus size={16}/></button></div>}

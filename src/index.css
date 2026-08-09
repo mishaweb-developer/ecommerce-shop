@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html {
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+  }
+  * {
+    @apply box-border;
+  }
+  body {
+    @apply m-0 overflow-x-hidden bg-white font-sans text-foreground antialiased;
+  }
+  button,
+  input {
+    font: inherit;
+  }
+  a {
+    @apply transition-colors;
+  }
+}
+@layer components {
+  .container-wide {
+    @apply mx-auto w-full max-w-[1440px] px-4 md:px-6 lg:px-8;
+  }
+  .container-content {
+    @apply mx-auto w-full max-w-[1220px] px-4 md:px-6 lg:px-8;
+  }
+  .display-text {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .title-text {
+    @apply text-xl leading-normal tracking-[-0.025em] lg:text-2xl;
+  }
+  .body-large {
+    @apply text-base leading-[1.55] tracking-[-0.025em] lg:text-lg;
+  }
+  .body-small {
+    @apply text-sm leading-[1.57] tracking-[-0.025em];
+  }
+  .section-space {
+    @apply py-10 md:py-14 lg:py-20;
+  }
+  .section-space-small {
+    @apply py-6 md:py-8 lg:py-12;
+  }
+}
