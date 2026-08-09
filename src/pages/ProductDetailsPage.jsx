@@ -3,15 +3,47 @@ import Breadcrumbs from "../components/layout/Breadcrumbs";
 import Button from "../components/ui/Button";
 import QuantityControl from "../components/ui/QuantityControl";
 import SizeOption from "../components/product/SizeOption";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { apiClient } from "../api/apiClient";
 
 export default function ProductDetailsPage() {
-  const product = {
-    name: "Product name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
-    price: 0,
-    sizes: ["S", "M", "L", "XL"],
-  };
+  // const product = {
+  //   name: "Product name",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+  //   price: 0,
+  //   sizes: ["S", "M", "L", "XL"],
+  // };
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function loadProduct() {
+      setLoading(true);
+      setError("");
+
+      try {
+        const data = await apiClient(`/products?select=*&id=eq.${id}`);
+        setProduct(data[0]);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProduct();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+
+  if (error) return <p>{error}</p>;
+
+  if (!product) return <p>Product not found.</p>;
+
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs
