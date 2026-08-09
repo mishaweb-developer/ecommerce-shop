@@ -18,6 +18,8 @@ export default function ProductDetailsPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
@@ -68,20 +70,33 @@ export default function ProductDetailsPage() {
             <p className="mb-3 font-semibold">Select size</p>
             <div className="flex flex-wrap gap-3">
               {product.sizes.map((size) => (
-                <SizeOption key={size} size={size} />
+                <SizeOption
+                  key={size}
+                  size={size}
+                  selected={selectedSize === size}
+                  onClick={() => setSelectedSize(size)}
+                />
               ))}
             </div>
           </div>
           <div className="mt-8">
             <p className="mb-3 font-semibold">Quantity</p>
-            <QuantityControl />
+            <QuantityControl
+              quantity={quantity}
+              onDecrease={() =>
+                setQuantity((prevQuantity) =>
+                  prevQuantity > 1 ? prevQuantity - 1 : 1,
+                )
+              }
+              onIncrease={() => setQuantity((prevQuantity) => prevQuantity + 1)}
+            />
           </div>
           <Button size="large" className="mt-8 w-full sm:w-auto">
             Add to Cart
           </Button>
         </div>
       </div>
-      {/* TASK-04: TODO: Uzmi ID proizvoda iz URL-a i učitaj proizvod. HINT: useParams, useState, useEffect i apiClient. TASK-05: TODO: Implementiraj selected size, quantity i kontrole. TASK-08: TODO: Poveži Add to Cart sa CartContext-om. */}
+      {/* TASK-05: TODO: Implementiraj selected size, quantity i kontrole. TASK-08: TODO: Poveži Add to Cart sa CartContext-om. */}
     </div>
   );
 }
