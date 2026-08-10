@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { useAuth } from "../contexts/AuthContext";
 import { apiClient } from "../api/apiClient";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
   const [fullName, setFullName] = useState("");
@@ -14,8 +15,9 @@ export default function CheckoutPage() {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
-  const { cart, cartTotal } = useCart();
+  const { cart, cartTotal, clearCart } = useCart();
   const { user, session } = useAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -90,6 +92,9 @@ export default function CheckoutPage() {
       },
       body: JSON.stringify(orderItems),
     });
+
+    clearCart();
+    navigate("/order-confirmation");
   }
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
