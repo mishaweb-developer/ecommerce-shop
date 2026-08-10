@@ -1,7 +1,7 @@
-import { Image as ImageIcon } from "lucide-react";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
 import TeamMemberCard from "../components/about/TeamMemberCard";
 import Button from "../components/ui/Button";
+import ImageBox from "../components/ui/ImageBox";
 
 const teamMembers = [
   {
@@ -9,31 +9,23 @@ const teamMembers = [
     role: "Founder & Creative Director",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.",
+    image: "",
   },
   {
     name: "Jamie Carter",
     role: "Product Designer",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent libero.",
+    image: "",
   },
   {
     name: "Taylor Brooks",
     role: "Customer Experience",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus ante dapibus.",
+    image: "",
   },
 ];
-
-function ImagePlaceholder() {
-  return (
-    <div className="flex aspect-[4/3] items-center justify-center rounded-[10px] bg-surface-muted text-muted-foreground">
-      <div className="text-center">
-        <ImageIcon className="mx-auto mb-2" aria-hidden="true" />
-        <span className="body-small">Image placeholder</span>
-      </div>
-    </div>
-  );
-}
 
 export default function AboutPage() {
   return (
@@ -42,7 +34,11 @@ export default function AboutPage() {
       <h1 className="display-text mb-8 md:mb-10">About Us</h1>
 
       <section className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-        <ImagePlaceholder />
+        <ImageBox
+          src=""
+          alt="About our fashion store"
+          aspect="4/3"
+        />
         <div>
           <h2 className="title-text font-bold">Who We Are</h2>
           <p className="body-large mt-4 text-muted-foreground">

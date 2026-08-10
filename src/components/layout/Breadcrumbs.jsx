@@ -1,2 +1,28 @@
-import { Link } from 'react-router-dom';
-export default function Breadcrumbs({items=[]}){return <nav aria-label="Breadcrumb" className="body-small flex flex-wrap gap-2 py-5"><Link to="/" className="text-muted-foreground hover:text-foreground">Home</Link>{items.map((item,index)=><span key={`${item.label}-${index}`} className="flex gap-2"><span aria-hidden="true">&gt;</span>{item.to?<Link to={item.to} className="text-muted-foreground hover:text-foreground">{item.label}</Link>:<span aria-current="page">{item.label}</span>}</span>)}</nav>}
+import { Link } from "react-router-dom";
+export default function Breadcrumbs({ items = [] }) {
+  return (
+    <nav
+      aria-label="Breadcrumb"
+      className="body-small flex flex-wrap gap-2 py-5"
+    >
+      <Link to="/" className="text-muted-foreground hover:text-foreground">
+        Home
+      </Link>
+      {items.map((item, index) => (
+        <span key={`${item.label}-${index}`} className="flex gap-2">
+          <span aria-hidden="true">&gt;</span>
+          {item.to ? (
+            <Link
+              to={item.to}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ) : (
+            <span aria-current="page">{item.label}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+  );
+}

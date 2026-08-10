@@ -312,8 +312,6 @@ These operations are not executed inside a single PostgreSQL transaction.
 
 In a production application, this could be improved by moving the complete checkout operation into a database function, RPC call, or backend endpoint so that order and order item creation can be handled atomically.
 
-Pagination for the product listing is also planned as a final improvement.
-
 ## Project Purpose
 
 This project was created as a practical React learning project focused on implementing real application logic instead of only building a static interface.

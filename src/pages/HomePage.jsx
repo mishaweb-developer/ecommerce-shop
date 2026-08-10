@@ -1,23 +1,11 @@
-import { Image as ImageIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "../components/ui/Button";
+import ImageBox from "../components/ui/ImageBox";
 const audiences = [
   ["Women", "women"],
   ["Kids", "kids"],
   ["Men", "men"],
 ];
-function Placeholder({ label, className = "" }) {
-  return (
-    <div
-      className={`flex items-center justify-center rounded-[10px] bg-surface-muted ${className}`}
-    >
-      <div className="text-center text-muted-foreground">
-        <ImageIcon className="mx-auto mb-2" />
-        <span className="text-sm">{label}</span>
-      </div>
-    </div>
-  );
-}
 export default function HomePage() {
   return (
     <>
@@ -37,9 +25,11 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-        <Placeholder
-          label="Hero image placeholder"
-          className="aspect-[4/3] lg:aspect-[5/4]"
+        <ImageBox
+          src=""
+          alt="Fashion collection"
+          aspect="4/3"
+          className="lg:aspect-[5/4]"
         />
       </section>
       <section className="bg-surface section-space">
@@ -48,10 +38,7 @@ export default function HomePage() {
           <div className="grid gap-6 lg:grid-cols-3">
             {audiences.map(([name, param]) => (
               <article key={name}>
-                <Placeholder
-                  label={`${name} image placeholder`}
-                  className="aspect-[3/4]"
-                />
+                <ImageBox src="" alt={`${name} fashion`} aspect="3/4" />
                 <Link to={`/products?audience=${param}`}>
                   <Button variant="outline" className="mt-4 w-full">
                     {name}
@@ -65,21 +52,15 @@ export default function HomePage() {
       <section className="section-space">
         <div className="container-wide">
           <div className="hidden grid-cols-2  lg:grid">
-            <Placeholder
-              label="CTA image placeholder"
-              className="aspect-[4/3]"
-            />
-            <Placeholder
-              label="CTA image placeholder"
-              className="aspect-[4/3]"
-            />
+            <ImageBox src="" alt="Fashion collection" aspect="4/3" />
+            <ImageBox src="" alt="Fashion collection" aspect="4/3" />
           </div>
           <div className="bg-surface-muted">
             <div className="container-content flex flex-col items-start gap-6 py-8 md:py-10 lg:flex-row lg:items-center lg:justify-between lg:py-12">
               <h2 className="display-text text-accent">
                 Lorem ipsum dolor sit amet
               </h2>
-              <Link to="/shop" className="shrink-0">
+              <Link to="/products" className="shrink-0">
                 <Button>Show All</Button>
               </Link>
             </div>
