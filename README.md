@@ -1,10 +1,21 @@
-# Ecommerce Shop
+# Fashion
 
-Responsive e-commerce application built with React, Vite, JavaScript, Tailwind CSS, and Supabase.
+Fashion is a responsive e-commerce application built with React, Vite, JavaScript, Tailwind CSS, and Supabase.
 
 The application includes product browsing and filtering, product details, shopping cart persistence, user authentication, protected routes, checkout, order creation, and order history.
 
 ## Features
+
+### UI / UX
+
+* Responsive layout for mobile, tablet, and desktop
+* Reusable image handling with `ImageBox`
+* Product images across Shop, Product Details, Cart, and Checkout
+* Responsive navigation with mobile menu
+* Product search from the Navbar
+* Loading, error, and empty states
+* Responsive checkout and order layouts
+* Custom Fashion branding and favicon
 
 ### Products
 
@@ -206,10 +217,12 @@ src/
 │   └── apiClient.js
 │
 ├── components/
+│   ├── about/
 │   ├── auth/
 │   ├── cart/
 │   ├── layout/
-│   ├── products/
+│   ├── product/
+│   ├── shop/
 │   └── ui/
 │
 ├── config/
@@ -300,6 +313,35 @@ Run ESLint:
 ```bash
 npm run lint
 ```
+
+## Deployment
+
+The application is prepared for deployment with Netlify.
+
+### Build settings
+
+Build command:
+
+```bash
+npm run build
+```
+
+Publish directory:
+
+```text
+dist
+```
+
+### Required environment variables
+
+The following environment variables must be configured in Netlify:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
+
+The local `.env` file should not be committed to Git.
 
 ## Current Limitations
 
