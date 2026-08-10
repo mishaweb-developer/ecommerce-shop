@@ -71,6 +71,25 @@ export default function CheckoutPage() {
     });
 
     const order = orders[0];
+
+    const orderItems = cart.map((item) => ({
+      order_id: order.id,
+      product_id: item.productId,
+      product_name: item.name,
+      image_url: item.imageUrl,
+      size: item.size,
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    await apiClient("/order_items", {
+      method: "POST",
+      token: session.access_token,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderItems),
+    });
   }
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
@@ -133,7 +152,7 @@ export default function CheckoutPage() {
           <CartContent items={cart} editable={false} />
         </div>
       </div>
-      {/* TASK-14: TODO: Implementiraj shipping state i validaciju. RULE: name min 2, address min 3, city min 2, postal min 3, country required i Cart ne sme biti prazan. TASK-15–17: STEPS: 1. Validiraj formu. 2. Proveri Cart. 3. Uzmi authenticated user/session. 4. Napravi orders red. 5. Uzmi order ID. 6. Napravi order_items. 7. Očisti Cart. 8. Preusmeri na potvrdu. HINT: AuthContext, CartContext, apiClient, Bearer token, POST i useNavigate. */}
+      {/* TASK-15–17: STEPS: 1. Validiraj formu. 2. Proveri Cart. 3. Uzmi authenticated user/session. 4. Napravi orders red. 5. Uzmi order ID. 6. Napravi order_items. 7. Očisti Cart. 8. Preusmeri na potvrdu. HINT: AuthContext, CartContext, apiClient, Bearer token, POST i useNavigate. */}
     </div>
   );
 }

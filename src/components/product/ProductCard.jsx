@@ -38,6 +38,7 @@ export default function ProductCard({ product }) {
             addToCart({
               productId: product.id,
               name: product.name,
+              imageUrl: product.image_url,
               price: product.price,
               size,
               quantity: 1,

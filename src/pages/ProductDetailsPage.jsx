@@ -23,6 +23,7 @@ export default function ProductDetailsPage() {
     addToCart({
       productId: product.id,
       name: product.name,
+      imageUrl: product.image_url,
       price: product.price,
       size: selectedSize,
       quantity,
