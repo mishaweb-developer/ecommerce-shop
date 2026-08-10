@@ -50,7 +50,7 @@ export default function HomePage() {
               <article key={name}>
                 <Placeholder
                   label={`${name} image placeholder`}
-                  className="aspect-[4/3]"
+                  className="aspect-[3/4]"
                 />
                 <Link to={`/products?audience=${param}`}>
                   <Button variant="outline" className="mt-4 w-full">
@@ -62,22 +62,28 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="container-content section-space">
-        <div className="grid overflow-hidden rounded-[10px] bg-surface-warm lg:grid-cols-2">
-          <div className="p-8 md:p-12 lg:p-16">
-            <h2 className="display-text">Lorem ipsum dolor sit amet</h2>
-            <p className="body-large mt-5 text-muted-foreground">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
-              ad minim veniam.
-            </p>
-            <Link to="/about">
-              <Button className="mt-7">About Us</Button>
-            </Link>
+      <section className="section-space">
+        <div className="container-wide">
+          <div className="hidden grid-cols-2  lg:grid">
+            <Placeholder
+              label="CTA image placeholder"
+              className="aspect-[4/3]"
+            />
+            <Placeholder
+              label="CTA image placeholder"
+              className="aspect-[4/3]"
+            />
           </div>
-          <Placeholder
-            label="CTA image placeholder"
-            className="min-h-72 rounded-none"
-          />
+          <div className="bg-surface-muted">
+            <div className="container-content flex flex-col items-start gap-6 py-8 md:py-10 lg:flex-row lg:items-center lg:justify-between lg:py-12">
+              <h2 className="display-text text-accent">
+                Lorem ipsum dolor sit amet
+              </h2>
+              <Link to="/shop" className="shrink-0">
+                <Button>Show All</Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>

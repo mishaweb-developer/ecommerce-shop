@@ -22,7 +22,7 @@ export default function ShopFilters({
   onClearFilters,
 }) {
   return (
-    <aside className="rounded-[10px] bg-surface p-5">
+    <aside className="rounded-[10px] border border-border-subtle bg-surface p-5">
       <h2 className="title-text mb-6 font-bold">Filters</h2>
       <FilterGroup
         title="Audience"

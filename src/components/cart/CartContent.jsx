@@ -6,6 +6,7 @@ export default function CartContent({
   onIncrease = () => {},
   onDecrease = () => {},
   onRemove = () => {},
+  showTotal = true,
 }) {
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -81,9 +82,11 @@ export default function CartContent({
           </article>
         ))}
       </div>
-      <div className="mt-6 flex justify-end border-t border-border-subtle pt-5">
+      {showTotal && (
+        <div className="mt-6 flex justify-end border-t border-border-subtle pt-5">
         <p className="title-text font-bold">Total: €{total.toFixed(2)}</p>
-      </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import Breadcrumbs from "../components/layout/Breadcrumbs";
 import CartContent from "../components/cart/CartContent";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { useAuth } from "../contexts/AuthContext";
 import { apiClient } from "../api/apiClient";
@@ -16,9 +16,46 @@ export default function CheckoutPage() {
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [shippingHeight, setShippingHeight] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const shippingRef = useRef(null);
   const { cart, cartTotal, clearCart } = useCart();
   const { user, session } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const shippingForm = shippingRef.current;
+
+    if (!shippingForm) return undefined;
+
+    const updateHeight = () => {
+      const height = shippingForm.getBoundingClientRect().height;
+
+      if (height > 0) setShippingHeight(height);
+    };
+
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(shippingForm);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const desktopMedia = window.matchMedia("(min-width: 1024px)");
+
+    const updateDesktopState = () => {
+      setIsDesktop(desktopMedia.matches);
+    };
+
+    updateDesktopState();
+    desktopMedia.addEventListener("change", updateDesktopState);
+
+    return () => {
+      desktopMedia.removeEventListener("change", updateDesktopState);
+    };
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -115,8 +152,12 @@ export default function CheckoutPage() {
         items={[{ label: "Cart", to: "/cart" }, { label: "Checkout" }]}
       />
       <h1 className="display-text mb-8">Checkout</h1>
-      <div className="grid gap-10 lg:grid-cols-[1fr_.9fr]">
-        <form className="space-y-5" onSubmit={handleSubmit}>
+      <div className="grid gap-10 lg:grid-cols-[1fr_.9fr] lg:items-stretch">
+        <form
+          ref={shippingRef}
+          className="space-y-5 lg:self-start"
+          onSubmit={handleSubmit}
+        >
           <h2 className="title-text font-bold">Shipping details</h2>
           <Input
             id="shipping-name"
@@ -170,9 +211,25 @@ export default function CheckoutPage() {
             {submitting ? "Placing Order..." : "Place Order"}
           </Button>
         </form>
-        <div>
-          <h2 className="title-text mb-5 font-bold">Order summary</h2>
-          <CartContent items={cart} editable={false} />
+        <div
+          className="min-h-0 lg:flex lg:flex-col lg:overflow-hidden"
+          style={
+            isDesktop && shippingHeight
+              ? { height: `${shippingHeight}px` }
+              : undefined
+          }
+        >
+          <h2 className="title-text mb-5 shrink-0 font-bold">
+            Order summary
+          </h2>
+          <div className="min-h-0 lg:flex-1 lg:overflow-y-auto lg:pr-2">
+            <CartContent items={cart} editable={false} showTotal={false} />
+          </div>
+          <div className="mt-5 shrink-0 border-t border-border-subtle pt-5">
+            <p className="title-text text-right font-bold">
+              Total: €{Number(cartTotal).toFixed(2)}
+            </p>
+          </div>
         </div>
       </div>
       {/* TASK-15–17: STEPS: 1. Validiraj formu. 2. Proveri Cart. 3. Uzmi authenticated user/session. 4. Napravi orders red. 5. Uzmi order ID. 6. Napravi order_items. 7. Očisti Cart. 8. Preusmeri na potvrdu. HINT: AuthContext, CartContext, apiClient, Bearer token, POST i useNavigate. */}

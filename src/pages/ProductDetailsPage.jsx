@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiClient } from "../api/apiClient";
 import { useCart } from "../contexts/CartContext";
+import PageState from "../components/ui/PageState";
 
 export default function ProductDetailsPage() {
   const [product, setProduct] = useState(null);
@@ -48,11 +49,25 @@ export default function ProductDetailsPage() {
     loadProduct();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <PageState type="loading" title="Loading product..." />;
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <PageState
+        type="error"
+        title="Something went wrong"
+        message={error}
+      />
+    );
 
-  if (!product) return <p>Product not found.</p>;
+  if (!product)
+    return (
+      <PageState
+        type="empty"
+        title="Product not found"
+        message="This product may no longer be available."
+      />
+    );
 
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
