@@ -4,6 +4,8 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
+import { apiClient } from "../api/apiClient";
 
 export default function CheckoutPage() {
   const [fullName, setFullName] = useState("");
@@ -13,8 +15,9 @@ export default function CheckoutPage() {
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
   const { cart, cartTotal } = useCart();
+  const { user, session } = useAuth();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setError("");
@@ -48,6 +51,26 @@ export default function CheckoutPage() {
       setError("Country is required.");
       return;
     }
+
+    const orders = await apiClient("/orders", {
+      method: "POST",
+      token: session.access_token,
+      headers: {
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        total_amount: cartTotal,
+        shipping_name: fullName.trim(),
+        shipping_address: address.trim(),
+        shipping_city: city.trim(),
+        shipping_postal_code: postalCode.trim(),
+        shipping_country: country.trim(),
+      }),
+    });
+
+    const order = orders[0];
   }
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
