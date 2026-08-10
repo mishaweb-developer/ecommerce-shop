@@ -15,6 +15,7 @@ export default function CheckoutPage() {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { cart, cartTotal, clearCart } = useCart();
   const { user, session } = useAuth();
   const navigate = useNavigate();
@@ -54,47 +55,59 @@ export default function CheckoutPage() {
       return;
     }
 
-    const orders = await apiClient("/orders", {
-      method: "POST",
-      token: session.access_token,
-      headers: {
-        "Content-Type": "application/json",
-        Prefer: "return=representation",
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        total_amount: cartTotal,
-        shipping_name: fullName.trim(),
-        shipping_address: address.trim(),
-        shipping_city: city.trim(),
-        shipping_postal_code: postalCode.trim(),
-        shipping_country: country.trim(),
-      }),
-    });
+    setSubmitting(true);
 
-    const order = orders[0];
+    try {
+      const orders = await apiClient("/orders", {
+        method: "POST",
+        token: session.access_token,
+        headers: {
+          "Content-Type": "application/json",
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify({
+          user_id: user.id,
+          total_amount: cartTotal,
+          shipping_name: fullName.trim(),
+          shipping_address: address.trim(),
+          shipping_city: city.trim(),
+          shipping_postal_code: postalCode.trim(),
+          shipping_country: country.trim(),
+        }),
+      });
 
-    const orderItems = cart.map((item) => ({
-      order_id: order.id,
-      product_id: item.productId,
-      product_name: item.name,
-      image_url: item.imageUrl,
-      size: item.size,
-      quantity: item.quantity,
-      price: item.price,
-    }));
+      const order = orders[0];
 
-    await apiClient("/order_items", {
-      method: "POST",
-      token: session.access_token,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderItems),
-    });
+      if (!order?.id) {
+        throw new Error("Order could not be created.");
+      }
 
-    clearCart();
-    navigate("/order-confirmation");
+      const orderItems = cart.map((item) => ({
+        order_id: order.id,
+        product_id: item.productId,
+        product_name: item.name,
+        image_url: item.imageUrl,
+        size: item.size,
+        quantity: item.quantity,
+        price: item.price,
+      }));
+
+      await apiClient("/order_items", {
+        method: "POST",
+        token: session.access_token,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderItems),
+      });
+
+      clearCart();
+      navigate("/order-confirmation");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
@@ -148,8 +161,13 @@ export default function CheckoutPage() {
           <div aria-live="polite" className="min-h-5 text-sm text-accent">
             {error}
           </div>
-          <Button type="submit" size="large" className="w-full">
-            Place Order
+          <Button
+            type="submit"
+            size="large"
+            className="w-full"
+            disabled={submitting}
+          >
+            {submitting ? "Placing Order..." : "Place Order"}
           </Button>
         </form>
         <div>

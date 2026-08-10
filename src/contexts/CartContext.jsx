@@ -3,15 +3,20 @@ import { createContext, useContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  /* TASK-06
-TODO: Implementiraj Cart state, add, remove, update, clear, total i ukupnu količinu.
-HINT: Koristi React Context i useState; localStorage dolazi u TASK-07.
-RULE: cartQuantity je zbir quantity vrednosti svih stavki, a Cart radi i za gosta.
-*/
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
 
-    return savedCart ? JSON.parse(savedCart) : [];
+    if (!savedCart) {
+      return [];
+    }
+
+    try {
+      const parsedCart = JSON.parse(savedCart);
+
+      return Array.isArray(parsedCart) ? parsedCart : [];
+    } catch {
+      return [];
+    }
   });
 
   const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);

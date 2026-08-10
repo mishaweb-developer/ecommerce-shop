@@ -25,8 +25,12 @@ export default function MyOrdersPage() {
           },
         );
 
-        const formattedOrders = data.flatMap((order) =>
-          order.order_items.map((item) => ({
+        const formattedOrders = data.flatMap((order) => {
+          const items = Array.isArray(order.order_items)
+            ? order.order_items
+            : [];
+
+          return items.map((item) => ({
             id: item.id,
             orderId: order.id,
             date: order.created_at,
@@ -35,11 +39,10 @@ export default function MyOrdersPage() {
             quantity: item.quantity,
             price: item.price,
             total: item.price * item.quantity,
-          })),
-        );
+          }));
+        });
 
         setOrders(formattedOrders);
-
       } catch (error) {
         setError(error.message);
       } finally {
