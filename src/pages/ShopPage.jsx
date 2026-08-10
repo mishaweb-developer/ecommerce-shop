@@ -175,9 +175,10 @@ export default function ShopPage() {
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs items={[{ label: "Shop" }]} />
       <div className="mb-8">
-        <h1 className="display-text">Shop</h1>
-        <p className="body-large mt-4 text-muted-foreground">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <h1 className="display-text text-center">Shop</h1>
+        <p className="body-large mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
+          Discover everyday fashion for women, men, and kids. Browse our
+          collection and find pieces that fit your style.
         </p>
       </div>
       <div className="mb-6 lg:hidden">

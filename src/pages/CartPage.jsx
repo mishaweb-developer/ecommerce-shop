@@ -10,7 +10,11 @@ export default function CartPage() {
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs items={[{ label: "Cart" }]} />
-      <h1 className="display-text mb-8">Cart</h1>
+      <h1 className="display-text text-center">Your Cart</h1>
+      <p className="body-large mx-auto mb-8 mt-3 max-w-2xl text-center text-muted-foreground">
+        Review your selected items, update quantities, and continue when you
+        are ready to place your order.
+      </p>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-start">
         <section className="min-w-0 lg:col-span-2">
           <div className="lg:max-h-[65vh] lg:overflow-y-auto lg:pr-2">

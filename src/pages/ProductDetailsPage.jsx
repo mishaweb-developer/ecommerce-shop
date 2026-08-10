@@ -1,6 +1,6 @@
-import { Image as ImageIcon } from "lucide-react";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
 import Button from "../components/ui/Button";
+import ImageBox from "../components/ui/ImageBox";
 import QuantityControl from "../components/ui/QuantityControl";
 import SizeOption from "../components/product/SizeOption";
 import { useParams } from "react-router-dom";
@@ -75,12 +75,11 @@ export default function ProductDetailsPage() {
         items={[{ label: "Shop", to: "/products" }, { label: product.name }]}
       />
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
-        <div className="flex aspect-[4/5] items-center justify-center rounded-[10px] bg-surface">
-          <div className="text-center text-muted-foreground">
-            <ImageIcon className="mx-auto mb-2" />
-            Product image placeholder
-          </div>
-        </div>
+        <ImageBox
+          src={product.image_url}
+          alt={product.name}
+          aspect="4/5"
+        />
         <div className="lg:py-8">
           <h1 className="display-text">{product.name}</h1>
           <p className="title-text mt-5 font-semibold">
@@ -123,7 +122,6 @@ export default function ProductDetailsPage() {
           </Button>
         </div>
       </div>
-      {/* TASK-05: TODO: Implementiraj selected size, quantity i kontrole. TASK-08: TODO: Poveži Add to Cart sa CartContext-om. */}
     </div>
   );
 }

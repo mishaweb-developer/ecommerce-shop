@@ -5,25 +5,25 @@ import ImageBox from "../components/ui/ImageBox";
 
 const teamMembers = [
   {
-    name: "Alex Morgan",
-    role: "Founder & Creative Director",
+    name: "Emily Johnson",
+    role: "Chief Executive Officer (CEO)",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.",
-    image: "",
+      "Emily leads our team with vision and a passion for innovation. With over 10 years of experience in the e-commerce industry, her mission is to ensure every customer has the best possible experience.",
+    image: "/about/tim-1.png",
   },
   {
-    name: "Jamie Carter",
-    role: "Product Designer",
+    name: "Sarah Smith",
+    role: "Head of Product Development ",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent libero.",
-    image: "",
+      "Sarah  oversees product development and selection. Her expertise in market trends and product quality ensures that our offerings meet the highest standards.",
+    image: "/about/tim-2.png",
   },
   {
-    name: "Taylor Brooks",
-    role: "Customer Experience",
+    name: "Michael Smith",
+    role: "Marketing & Community Manager",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus ante dapibus.",
-    image: "",
+      "Michael manages all marketing campaigns and community engagement. He ensures that every customer receives clear information and feels connected to our brand.",
+    image: "/about/tim-3.png",
   },
 ];
 
@@ -31,23 +31,35 @@ export default function AboutPage() {
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs items={[{ label: "About Us" }]} />
-      <h1 className="display-text mb-8 md:mb-10">About Us</h1>
+      <h1 className="display-text text-center">About Us</h1>
+      <p className="body-large mx-auto mb-8 mt-3 max-w-2xl text-center text-muted-foreground md:mb-10">
+        We believe fashion should be simple, comfortable, and easy to enjoy
+        every day.
+      </p>
 
       <section className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <ImageBox
-          src=""
+          src="/about/who-we-are.png"
           alt="About our fashion store"
-          aspect="4/3"
+          aspect="3/4"
         />
         <div>
-          <h2 className="title-text font-bold">Who We Are</h2>
+          <h2 className="title-text font-bold">So, who are we?</h2>
           <p className="body-large mt-4 text-muted-foreground">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Since our founding in 2015, our mission has always been to bring
+            quality and convenience to our customers. We believe in
+            transparency, sustainability, and delivering value in every product
+            we offer. Over the years, we’ve grown from a small local shop to a
+            trusted e-commerce brand serving thousands of satisfied customers.
           </p>
           <p className="body-large mt-4 text-muted-foreground">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris.
+            Every product is carefully selected and tested to ensure it meets
+            our high standards. Our team is passionate about innovation and
+            constantly works on improving the shopping experience, offering new
+            products, and listening to our community’s feedback. We are
+            committed to giving back to the community and supporting local
+            initiatives, because we believe a business should make a positive
+            impact beyond its sales.
           </p>
           <Button className="mt-7">Get in Touch</Button>
         </div>
@@ -57,7 +69,8 @@ export default function AboutPage() {
         <div className="mb-8 text-center md:mb-10">
           <h2 className="display-text">Meet the Team</h2>
           <p className="body-large mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Meet the people who shape our collections and make shopping with
+            Fashion simple and enjoyable.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

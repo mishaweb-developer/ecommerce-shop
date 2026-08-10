@@ -10,8 +10,8 @@ export default function OrderConfirmationPage() {
         <CircleCheck size={48} className="mx-auto text-green-700" />
         <h1 className="display-text mt-5">Order confirmed</h1>
         <p className="body-large mt-5 text-muted-foreground">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt.
+          Your order has been placed successfully. You can view your order
+          details in My Orders or continue shopping.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link to="/my-orders">

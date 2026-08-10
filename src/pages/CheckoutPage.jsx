@@ -151,7 +151,11 @@ export default function CheckoutPage() {
       <Breadcrumbs
         items={[{ label: "Cart", to: "/cart" }, { label: "Checkout" }]}
       />
-      <h1 className="display-text mb-8">Checkout</h1>
+      <h1 className="display-text text-center">Checkout</h1>
+      <p className="body-large mx-auto mb-8 mt-3 max-w-2xl text-center text-muted-foreground">
+        Enter your shipping details and review your order before completing
+        your purchase.
+      </p>
       <div className="grid gap-10 lg:grid-cols-[1fr_.9fr] lg:items-stretch">
         <form
           ref={shippingRef}

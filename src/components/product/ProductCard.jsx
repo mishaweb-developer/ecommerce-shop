@@ -1,5 +1,5 @@
-import { Image as ImageIcon } from "lucide-react";
 import Button from "../ui/Button";
+import ImageBox from "../ui/ImageBox";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../contexts/CartContext";
 
@@ -12,12 +12,11 @@ export default function ProductCard({ product }) {
       className="group flex h-full cursor-pointer flex-col rounded-xl border border-border-subtle/60 bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
       onClick={() => navigate(`/products/${product.id}`)}
     >
-      <div className="flex aspect-[4/5] items-center justify-center rounded-[10px] bg-surface">
-        <div className="text-center text-muted-foreground">
-          <ImageIcon className="mx-auto mb-2" />
-          <span className="text-xs">Product image</span>
-        </div>
-      </div>
+      <ImageBox
+        src={product.image_url}
+        alt={product.name}
+        aspect="4/5"
+      />
       <div className="flex flex-1 flex-col px-1 pb-1 pt-4">
         <p className="text-xs uppercase text-muted-foreground">
           {product.category}

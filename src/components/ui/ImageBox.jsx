@@ -17,7 +17,7 @@ export default function ImageBox({
 
   return (
     <div
-      className={`overflow-hidden rounded-[10px] ${aspectClass} ${className}`}
+      className={`overflow-hidden ${aspectClass} ${className}`}
     >
       {src ? (
         <img src={src} alt={alt} className="h-full w-full object-cover" />

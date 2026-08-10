@@ -51,7 +51,11 @@ export default function RegisterPage() {
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs items={[{ label: "Register" }]} />
       <div className="mx-auto max-w-lg">
-        <h1 className="display-text mb-8">Register</h1>
+        <h1 className="display-text text-center">Register</h1>
+        <p className="body-small mx-auto mb-8 mt-3 max-w-2xl text-center text-muted-foreground">
+          Create your Fashion account to place orders and keep track of your
+          purchases.
+        </p>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <Input
             id="full-name"

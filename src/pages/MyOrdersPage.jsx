@@ -40,7 +40,11 @@ export default function MyOrdersPage() {
   return (
     <div className="container-content pb-10 md:pb-14 lg:pb-20">
       <Breadcrumbs items={[{ label: "My Orders" }]} />
-      <h1 className="display-text mb-8">My Orders</h1>
+      <h1 className="display-text text-center">My Orders</h1>
+      <p className="body-large mx-auto mb-8 mt-3 max-w-2xl text-center text-muted-foreground">
+        View your previous purchases and review the products included in each
+        order.
+      </p>
       {loading && <PageState type="loading" title="Loading orders..." />}
       {error && (
         <PageState
