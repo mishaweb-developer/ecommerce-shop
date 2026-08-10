@@ -4,11 +4,13 @@ import { Menu, ShoppingCart, Store, UserRound, X } from "lucide-react";
 import NavLinks from "./NavLinks";
 import SearchInput from "../ui/SearchInput";
 import { useCart } from "../../contexts/CartContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { cartQuantity } = useCart();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   function handleSearchSubmit(e) {
@@ -55,9 +57,15 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
-            <Link to="/login" aria-label="Login">
-              <UserRound />
-            </Link>
+            {user ? (
+              <button type="button" onClick={logout} aria-label="Logout">
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" aria-label="Login">
+                <UserRound />
+              </Link>
+            )}
             {/* TASK-12: TODO: Prikaži Login ili Logout prema auth stanju. RULE: Register ne pripada Navbar-u. */}
           </div>
         </div>
