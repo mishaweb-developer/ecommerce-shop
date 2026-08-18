@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import GuestRoute from "./components/auth/GuestRoute";
 
 export default function App() {
   return (
@@ -20,8 +21,10 @@ export default function App() {
         <Route path="products" element={<ShopPage />} />
         <Route path="products/:id" element={<ProductDetailsPage />} />
         <Route path="about" element={<AboutPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+        <Route element={<GuestRoute />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+        </Route>
         <Route path="cart" element={<CartPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="checkout" element={<CheckoutPage />} />
