@@ -30,7 +30,7 @@ export default function CartContent({
             key={`${item.productId}-${item.size}`}
             className="grid grid-cols-[80px_1fr] gap-4 rounded-[10px] border border-border-subtle p-4 md:grid-cols-[100px_1fr_auto]"
           >
-            <ImageBox src={item.imageUrl} alt={item.name} aspect="4/5" />
+            <ImageBox src={item.imageUrl} alt={item.name} aspect="4/5" lazy loading />
             <div>
               <h2 className="font-semibold">{item.name}</h2>
               <p className="body-small text-muted-foreground">

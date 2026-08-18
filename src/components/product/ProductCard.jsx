@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
       className="group flex h-full cursor-pointer flex-col rounded-xl border border-border-subtle/60 bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
       onClick={() => navigate(`/products/${product.id}`)}
     >
-      <ImageBox src={product.image_url} alt={product.name} aspect="4/5" />
+      <ImageBox src={product.image_url} alt={product.name} aspect="4/5" lazy loading />
       <div className="flex flex-1 flex-col px-1 pb-1 pt-4">
         <p className="text-xs uppercase text-muted-foreground">
           {product.category}
