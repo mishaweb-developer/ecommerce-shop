@@ -65,7 +65,6 @@ export default function ProductCard({ product }) {
           </span>
         </Button>
       </div>
-      {/* TASK-08: TODO: Klik kartice vodi na detalje, a dugme radi quick-add bez navigacije. HINT: Ako sizes sadrži L koristi L, inače prvi size; quantity je 1. */}
     </article>
   );
 }

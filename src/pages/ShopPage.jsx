@@ -129,6 +129,7 @@ export default function ShopPage() {
           is_active: "eq.true",
         });
         if (audience) productParams.set("audience", `eq.${audience}`);
+
         const selectedCategory = categoriesData.find(
           (categoryItem) => categoryItem.slug === category,
         );

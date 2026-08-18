@@ -1,13 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../config/supabase";
 
-const AuthContext = createContext(undefined);
+const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  /* TASK-10
-TODO: Implementiraj user, session, loading, početnu proveru sesije, auth subscription, cleanup i logout.
-HINT: useState, useEffect, supabase.auth.getSession i supabase.auth.onAuthStateChange.
-*/
+
   const [user, setUser] = useState(null);
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);

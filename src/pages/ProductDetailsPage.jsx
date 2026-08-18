@@ -8,19 +8,27 @@ import { useEffect, useState } from "react";
 import { apiClient } from "../api/apiClient";
 import { useCart } from "../contexts/CartContext";
 import PageState from "../components/ui/PageState";
+import { Check } from "lucide-react";
 
 export default function ProductDetailsPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [sizeError, setSizeError] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+
   const { id } = useParams();
   const { addToCart } = useCart();
 
   function handleAddToCart() {
-    if (!selectedSize) return;
+    if (!selectedSize) {
+      setSizeError("Please select a size.");
+      return;
+    }
 
+    setSizeError("");
     addToCart({
       productId: product.id,
       name: product.name,
@@ -29,6 +37,11 @@ export default function ProductDetailsPage() {
       size: selectedSize,
       quantity,
     });
+    setAdded(true);
+
+    setTimeout(()=>{
+      setAdded(false)
+    },1500)
   }
 
   useEffect(() => {
@@ -53,11 +66,7 @@ export default function ProductDetailsPage() {
 
   if (error)
     return (
-      <PageState
-        type="error"
-        title="Something went wrong"
-        message={error}
-      />
+      <PageState type="error" title="Something went wrong" message={error} />
     );
 
   if (!product)
@@ -75,11 +84,7 @@ export default function ProductDetailsPage() {
         items={[{ label: "Shop", to: "/products" }, { label: product.name }]}
       />
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-14">
-        <ImageBox
-          src={product.image_url}
-          alt={product.name}
-          aspect="4/5"
-        />
+        <ImageBox src={product.image_url} alt={product.name} aspect="4/5" />
         <div className="lg:py-8">
           <h1 className="display-text">{product.name}</h1>
           <p className="title-text mt-5 font-semibold">
@@ -96,10 +101,14 @@ export default function ProductDetailsPage() {
                   key={size}
                   size={size}
                   selected={selectedSize === size}
-                  onClick={() => setSelectedSize(size)}
+                  onClick={() => {
+                    setSelectedSize(size);
+                    setSizeError("");
+                  }}
                 />
               ))}
             </div>
+            {sizeError && <p className="mt-4 text-accent">{sizeError}</p>}
           </div>
           <div className="mt-8">
             <p className="mb-3 font-semibold">Quantity</p>
@@ -118,7 +127,19 @@ export default function ProductDetailsPage() {
             className="mt-8 w-full sm:w-auto"
             onClick={handleAddToCart}
           >
-            Add to Cart
+            <span
+              className="flex items-center justify-center gap-2"
+              aria-live="polite"
+            >
+              {added ? (
+                <>
+                  <Check size={18} />
+                  Added
+                </>
+              ) : (
+                "Add to Cart"
+              )}
+            </span>
           </Button>
         </div>
       </div>

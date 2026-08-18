@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
+
 export default function App() {
   return (
     <Routes>

@@ -75,7 +75,6 @@ export default function LoginPage() {
             Register
           </Link>
         </p>
-        {/* TASK-12: TODO: Dodaj form state, login, greške i navigaciju. HINT: useState, supabase.auth.signInWithPassword i useNavigate. */}
       </div>
     </div>
   );
